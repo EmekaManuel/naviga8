@@ -1,4 +1,12 @@
-import { ArrowRight, MapPin, Trash2, LocateIcon, SaveIcon } from "lucide-react";
+import {
+  ArrowRight,
+  MapPin,
+  Trash2,
+  LocateIcon,
+  SaveIcon,
+  DeleteIcon,
+  Trash2Icon,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import {
@@ -13,7 +21,7 @@ import styles from "./ProductDemo.module.scss";
 import axios from "axios";
 
 const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-const API_SERVER = process.env.NEXT_PUBLIC_BACKEND_SERVER;
+const apiUrl = "http://localhost:3000";
 
 if (!GOOGLE_MAPS_API_KEY) {
   throw new Error(
@@ -85,13 +93,12 @@ export default function ProductDemo() {
     );
   };
 
-  // Fetch user's saved routes on component mount
   useEffect(() => {
     const fetchSavedRoutes = async () => {
       try {
         // Replace with actual user ID when authentication is implemented
         const response = await axios.get(
-          API_SERVER + "/api/naviga8/savedlocations"
+          `${apiUrl}/api/naviga8/savedlocations`
         );
         setSavedRoutes(response.data);
       } catch (error) {
@@ -149,7 +156,7 @@ export default function ProductDemo() {
       console.log(routeData);
 
       const response = await axios.post(
-        "/api/naviga8/savelocations",
+        `${apiUrl}/api/naviga8/savelocations`,
         routeData
       );
       setSavedRoutes([...savedRoutes, response.data]);
@@ -200,6 +207,15 @@ export default function ProductDemo() {
     setDuration("");
     if (originRef.current) originRef.current.value = "";
     if (destinationRef.current) destinationRef.current.value = "";
+  };
+
+  const deleteRoute = async (routeId: string) => {
+    try {
+      await axios.delete(`${apiUrl}/api/naviga8/savedlocations/${routeId}`);
+      setSavedRoutes(savedRoutes.filter((route) => route._id !== routeId));
+    } catch (error) {
+      console.error("Error deleting route:", error);
+    }
   };
 
   if (!isLoaded) {
@@ -282,11 +298,17 @@ export default function ProductDemo() {
           <SavedRoutesContainer>
             <h3>Saved Routes</h3>
             {savedRoutes.map((route, index) => (
-              <SavedRouteItem key={index}>
-                <p>From: {route.origin.address}</p>
-                <p>To: {route.destination.address}</p>
-                <p>Distance: {route.distance}</p>
-                <p>Duration: {route.duration}</p>
+              <SavedRouteItem key={route._id}>
+                <div>
+                  <p>From: {route.origin.address}</p>
+                  <p>To: {route.destination.address}</p>
+                  <p>Distance: {route.distance}</p>
+                  <p>Duration: {route.duration}</p>
+                </div>
+                <Trash2Icon
+                  color="red"
+                  onClick={() => deleteRoute(route._id)}
+                />
               </SavedRouteItem>
             ))}
           </SavedRoutesContainer>
@@ -296,6 +318,19 @@ export default function ProductDemo() {
   );
 }
 const StyledCard = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 0.375rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  gap: 1rem;
+`;
+const Card = styled.div`
   position: relative;
   display: flex;
   flex-direction: row;
@@ -457,6 +492,9 @@ const SavedRoutesContainer = styled.div`
 
 const SavedRouteItem = styled.div`
   background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border: 1px solid #e2e8f0;
   border-radius: 0.375rem;
   padding: 0.75rem;
