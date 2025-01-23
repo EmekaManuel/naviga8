@@ -13,6 +13,7 @@ import styles from "./ProductDemo.module.scss";
 import axios from "axios";
 
 const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+const API_SERVER = process.env.NEXT_PUBLIC_BACKEND_SERVER;
 
 if (!GOOGLE_MAPS_API_KEY) {
   throw new Error(
@@ -89,7 +90,9 @@ export default function ProductDemo() {
     const fetchSavedRoutes = async () => {
       try {
         // Replace with actual user ID when authentication is implemented
-        const response = await axios.get("/routes/user123");
+        const response = await axios.get(
+          API_SERVER + "/api/naviga8/savedlocations"
+        );
         setSavedRoutes(response.data);
       } catch (error) {
         console.error("Error fetching saved routes:", error);
@@ -129,7 +132,7 @@ export default function ProductDemo() {
       );
 
       const routeData = {
-        userId: "user123", // Replace with actual user ID
+        userId: Math.random().toString(36).substring(2, 15),
         origin: {
           address: originRef.current.value,
           latitude: originPlace.lat,
@@ -143,8 +146,12 @@ export default function ProductDemo() {
         distance,
         duration,
       };
+      console.log(routeData);
 
-      const response = await axios.post("/routes", routeData);
+      const response = await axios.post(
+        "/api/naviga8/savelocations",
+        routeData
+      );
       setSavedRoutes([...savedRoutes, response.data]);
     } catch (error) {
       console.error("Error saving route:", error);
@@ -274,7 +281,7 @@ export default function ProductDemo() {
         {dummyRoutesData.length > 0 && (
           <SavedRoutesContainer>
             <h3>Saved Routes</h3>
-            {dummyRoutesData.map((route, index) => (
+            {savedRoutes.map((route, index) => (
               <SavedRouteItem key={index}>
                 <p>From: {route.origin.address}</p>
                 <p>To: {route.destination.address}</p>
