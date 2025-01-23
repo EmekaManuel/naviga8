@@ -21,7 +21,7 @@ import styles from "./ProductDemo.module.scss";
 import axios from "axios";
 
 const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-const apiUrl = "http://localhost:3000";
+const apiUrl = "https://naviga8-backend-1.onrender.com";
 
 if (!GOOGLE_MAPS_API_KEY) {
   throw new Error(
