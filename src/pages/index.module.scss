@@ -1,0 +1,8 @@
+@import '../styles/sizes.scss';
+@import '../styles/variables.scss';
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -1,0 +1,9 @@
+@import '../../styles/sizes.scss';
+@import '../../styles/variables.scss';
+
+.avatar {
+    width: px(85);
+    height: px(85);
+    border-radius: px(95);
+    object-fit: center;
+}

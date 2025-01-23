@@ -1,0 +1,22 @@
+@import "../../styles/sizes.scss";
+@import "../../styles/variables.scss";
+
+// the modal styling is now maintained in the UiModal.tsx file using styled components
+
+.modal_card {
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  left: initial;
+  border-radius: 0;
+  width: 80%;
+  background: white;
+  height: 100vh;
+  padding: px(12);
+
+  .modal_header {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

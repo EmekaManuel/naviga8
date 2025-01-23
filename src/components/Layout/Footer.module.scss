@@ -1,0 +1,123 @@
+@import "../../styles/sizes.scss";
+@import "../../styles/variables.scss";
+
+.footer {
+  background-color: $color-gray-20;
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .footer_inner {
+    margin: auto;
+    padding: 0 px(16);
+    width: $screen-width;
+    max-width: $max-screen-width;
+
+    .footer_cta {
+      display: grid;
+      gap: px(32);
+      // padding: px(64) 0;
+      border-bottom: px(1) solid $color-gray-40;
+
+      h3 {
+        font-size: px(32);
+        font-weight: 700;
+        line-height: 140%;
+        letter-spacing: px(-0.64);
+        max-width: px(450);
+      }
+      button {
+        min-width: px(180);
+      }
+    }
+
+    footer {
+      padding: px(64) 0;
+      border-bottom: px(1) solid $color-gray-40;
+      gap: px(64);
+      display: flex;
+      flex-direction: column;
+
+      h3 {
+        font-size: px(16);
+        font-weight: 700;
+        line-height: px(24);
+      }
+
+      p {
+        font-size: px(14);
+        line-height: px(22);
+      }
+
+      .logo_container {
+        display: grid;
+        gap: px(30);
+        color: $color-gray-90;
+        width: fit-content;
+        height: fit-content;
+
+        .social_links {
+          display: flex;
+          gap: px(20);
+          font-size: px(24);
+        }
+      }
+
+      .list_container {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: px(40);
+
+        .list_title {
+          margin-bottom: px(21);
+          font-size: px(16);
+          font-weight: 700;
+          line-height: px(24);
+        }
+      }
+
+      ul {
+        li {
+          font-size: px(14);
+          // line-height: px(40);
+          font-weight: 400;
+          color: $color-gray-90;
+        }
+      }
+    }
+
+    .copyright {
+      color: #464056;
+      padding: px(64) 0;
+      font-size: px(12);
+      letter-spacing: px(0.6);
+    }
+
+    @media screen and (min-width: #{$mobileLargeWidth}) {
+      .footer_cta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: px(32);
+      }
+
+      footer {
+        .list_container {
+          width: 50%;
+          grid-template-columns: auto auto auto;
+        }
+      }
+
+      footer {
+        justify-content: space-between;
+        flex-direction: row;
+      }
+    }
+
+    @media screen and (min-width: #{$laptopWidth}) {
+      padding: px(0);
+    }
+  }
+}

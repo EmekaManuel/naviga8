@@ -1,0 +1,25 @@
+@import "../../styles/sizes.scss";
+@import "../../styles/variables.scss";
+
+.product_demo {
+  position: relative;
+  max-width: $max-screen-width;
+  width: $screen-width;
+  height: 95vh;
+  background: $color-gray-40;
+  border-radius: px(24);
+  margin-top: px(96);
+  padding: px(10);
+  overflow: hidden; /* Prevent any overflow */
+
+  &_banner {
+    height: 100%;
+    width: 100%;
+    border-radius: px(20);
+  }
+
+  @media screen and (min-width: #{$tabletSmallWidth}) {
+    padding: px(50);
+    border-radius: px(64);
+  }
+}

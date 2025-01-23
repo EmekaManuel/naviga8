@@ -1,0 +1,14 @@
+@import '../../styles/sizes.scss';
+@import '../../styles/variables.scss';
+
+.ui_field{
+  font-size: px(14);
+  color: $color-neutralBlack;
+  font-weight: 700;
+  line-height: px(32);
+  text-align: left;
+
+  .error_message{
+    color: $color-danger;
+  }
+}

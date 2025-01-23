@@ -1,0 +1,71 @@
+@import '../../styles/sizes.scss';
+@import '../../styles/variables.scss';
+
+.hero_section {
+    margin-top: px(90);
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-image: url('../../assets/bg-lines.svg');
+    background-repeat: repeat;
+    max-width: $max-screen-width;
+    width: $screen-width;
+
+    h1 {
+        color: $color-gray-90;
+        font-size: px(52);
+        font-style: normal;
+        font-weight: 700;
+        line-height: px(52);
+        letter-spacing: -1.92px;
+        width: 95%;
+        max-width: px(900);
+    }
+
+    p {
+        color: $color-gray-80;
+        font-size: px(24);
+        font-style: normal;
+        font-weight: 400;
+        line-height: 140%;
+        width: 70%;
+        padding: px(32) 0 px(24) 0
+    }
+
+    button {
+        display: block;
+        width: 100%;
+        min-width: px(200);
+    }
+
+    @media screen and (min-width: #{$mobileLargeWidth}) {
+        button {
+            width: fit-content;
+        }
+
+        h1 {
+            font-size: px(60);
+            line-height: px(68);
+        }
+    }
+
+    @media screen and (min-width: #{$tabletSmallWidth}) {
+        h1 {
+            font-size: px(72);
+        }
+    }
+
+    @media screen and (min-width: #{$tabletLargeWidth}) {
+        h1 {
+            font-size: px(96);
+            line-height: px(100);
+        }
+        p {
+            font-size: px(28);
+            width: 65%;
+        }
+    }
+}
